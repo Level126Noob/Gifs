@@ -1,0 +1,9 @@
+button {
+    background-color: cyan;
+    padding: 5px;
+}
+#gif-view {
+    top: 40%;
+    width: 80%;
+    height: 60%;
+}
