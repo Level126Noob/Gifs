@@ -1,12 +1,14 @@
 $(document).ready(function () {
     
 
-
+//making the initial array for the buttons, to be added to later.
 var animals = ['dog', 'cat', 'rabbit', 'hamster', 'skunk', 'goldfish',
     'bird', 'ferret', 'turtle', 'sugar glider', 'chinchilla', 'hedgehog', 'hermit crab',
     'gerbil', 'pygmy goat', 'chicken', 'capybara', 'teacup pig', 'serval', 'salamander', 'frog'
 ]
 
+//making a function to communicate with Giphy API and setting data varibales.  This also populates the page with the gifs when you click on the button
+//through the for if statements.
 function displayAnimalInfo() {
     var animal = $(this).attr('data-name');
     var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=FyOiNZxGZwCSwKje0YUf34Lxw8P8OmCn&q=' + animal + '&limit=10&offset=0&rating=G&lang=en'
@@ -20,7 +22,6 @@ function displayAnimalInfo() {
         animalResponse = response.data;
         console.log(response);
 
-        // TO DO: create foreach loop loop here going through each individual animalResponse
         for (var i = 0; i < animalResponse.length; i++) {
 
             if (animalResponse[i].rating !== "r" && animalResponse.rating !== "pg-13") {
@@ -41,6 +42,7 @@ function displayAnimalInfo() {
     });
 }
 
+//this assigns the data to all the buttons from gify query, makes the buttons, and lists the text of the query search, then appends it to the buttons section.
 function renderButtons() {
 
     $('#buttons-view').empty();
@@ -54,6 +56,7 @@ function renderButtons() {
     };
 }
 
+//this moves the gif that you search into the animals array, later creating the button and query in other functions.
 $('#add-gif').on('click', function (event) {
     event.preventDefault();
 
@@ -63,11 +66,12 @@ $('#add-gif').on('click', function (event) {
     renderButtons();
 });
 
+//globally calling the functions so that the App populates and does the onclick functions whenever they are triggered.
 renderButtons();
 $(document).on('click', '.animal-btn', displayAnimalInfo);
 $(document).on("click", 'img', Animate);
 
-  //Function accesses "data-state" attribute and depending on status, changes image source to "data-animate" or "data-still"
+  //animates the gif through a click function depending on the data-state assigned to each image.
   function Animate() {
   	 var state = $(this).attr("data-state");
       if (state === "still") {
