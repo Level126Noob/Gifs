@@ -1,9 +1,36 @@
 button {
-    background-color: cyan;
+    background-color: rgb(9, 145, 145);
     padding: 5px;
+    color: white;
+    border-radius: 10px;
+    font-size: 20px;
 }
 #gif-view {
     top: 40%;
     width: 80%;
     height: 60%;
+}
+img {
+    position: relative;
+    margin: 0 auto;
+    padding: 10px;
+}
+p {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    display: block;
+    text-align: center;
+    font-size: 20px;
+}
+#GIF {
+    position: relative;
+    float: left;
+}
+form {
+    float: right;
+}
+h2 {
+   margin-left: 82%;
+   margin-bottom: 0px;
 }
