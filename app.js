@@ -24,8 +24,8 @@ function displayAnimalInfo() {
         for (var i = 0; i < animalResponse.length; i++) {
 
             if (animalResponse[i].rating !== "r" && animalResponse.rating !== "pg-13") {
-                var GifImage = animalResponse[i].images.fixed_width_small_still.url
-                var GifHolder = $('<img>').attr('src', GifImage).attr('data-animate', animalResponse[i].images.fixed_width_small.url).attr('data-state', 'still').attr('data-still', GifImage);
+                var GifImage = animalResponse[i].images.fixed_height_small_still.url
+                var GifHolder = $('<img>').attr('src', GifImage).attr('data-animate', animalResponse[i].images.fixed_height_small.url).attr('data-state', 'still').attr('data-still', GifImage);
                 var GIF = $('<div id ="GIF">')
                 var p = $("<p>").text("Rating: " + animalResponse[i].rating);
                 $(GIF).append(p);
