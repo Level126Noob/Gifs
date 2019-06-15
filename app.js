@@ -24,9 +24,12 @@ function displayAnimalInfo() {
 
         for (var i = 0; i < animalResponse.length; i++) {
 
+            //if function for making sure that no one gets rated "R", or "PG-13" GIFS, and removing gifs on click of another gif button.
             if (animalResponse[i].rating !== "r" && animalResponse.rating !== "pg-13") {
                 var GifImage = animalResponse[i].images.fixed_height_small_still.url
+                //assinging all attributes using above variable for data-still, data-state, and data-animate. Attaching them to the img.
                 var GifHolder = $('<img>').attr('src', GifImage).attr('data-animate', animalResponse[i].images.fixed_height_small.url).attr('data-state', 'still').attr('data-still', GifImage);
+                //Assinging the GIF variable an ID for CSS styling purposes
                 var GIF = $('<div id ="GIF">')
                 var p = $("<p>").text("Rating: " + animalResponse[i].rating);
                 $(GIF).append(p);
