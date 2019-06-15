@@ -1,3 +1,7 @@
+$(document).ready(function () {
+    
+
+
 var animals = ['dog', 'cat', 'rabbit', 'hamster', 'skunk', 'goldfish',
     'bird', 'ferret', 'turtle', 'sugar glider', 'chinchilla', 'hedgehog', 'hermit crab',
     'gerbil', 'pygmy goat', 'chicken', 'capybara', 'teacup pig', 'serval', 'salamander', 'frog'
@@ -7,6 +11,7 @@ function displayAnimalInfo() {
     var animal = $(this).attr('data-name');
     var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=FyOiNZxGZwCSwKje0YUf34Lxw8P8OmCn&q=' + animal + '&limit=10&offset=0&rating=G&lang=en'
     var animalResponse = [];
+    var count = 0;
 
     $.ajax({
         url: queryURL,
@@ -17,29 +22,22 @@ function displayAnimalInfo() {
 
         // TO DO: create foreach loop loop here going through each individual animalResponse
         for (var i = 0; i < animalResponse.length; i++) {
-               
-                if (animalResponse[i].rating !== "r" && animalResponse.rating !== "pg-13") {
-                    var GifImage = animalResponse[i].images.fixed_width.url;
-                    var GifHolder = $('<img>').attr('src', GifImage);
-                    var GIF = $('<div id = "GIF">')
-                    var p = $("<p>").text("Rating: " + animalResponse[i].rating);
-                    $(GIF).append(p);
-                    $(GIF).append(GifHolder);
-                    $('#gif-view').append(GIF);
-                }
-                console.log(animalResponse[i].slug);
-                console.log(animalResponse[i]);
-               
-                
-              
-            //Here you will iterate over putting the response gifs on the page by adding HTML.
+
+            if (animalResponse[i].rating !== "r" && animalResponse.rating !== "pg-13") {
+                var GifImage = animalResponse[i].images.fixed_width_small_still.url
+                var GifHolder = $('<img>').attr('src', GifImage).attr('data-animate', animalResponse[i].images.fixed_width_small.url).attr('data-state', 'still').attr('data-still', GifImage);
+                var GIF = $('<div id ="GIF">')
+                var p = $("<p>").text("Rating: " + animalResponse[i].rating);
+                $(GIF).append(p);
+                $(GIF).append(GifHolder);
+                $('#gif-view').append(GIF);
+                count++;
+            } if (count === 1) {
+                $('#gif-view').empty
+            }
+            console.log(animalResponse[i].slug);
+            console.log(animalResponse[i]);
         }
-
-        //  Put that code below (lines 27-31) up there in the for loop, but change the GifImage variable to use the animalResponse[i].whatever~
-        // END TO DO
-
-
-        
     });
 }
 
@@ -55,6 +53,7 @@ function renderButtons() {
         $('#buttons-view').append(a);
     };
 }
+
 $('#add-gif').on('click', function (event) {
     event.preventDefault();
 
@@ -64,5 +63,20 @@ $('#add-gif').on('click', function (event) {
     renderButtons();
 });
 
-$(document).on('click', '.animal-btn', displayAnimalInfo);
 renderButtons();
+$(document).on('click', '.animal-btn', displayAnimalInfo);
+$(document).on("click", 'img', Animate);
+
+  //Function accesses "data-state" attribute and depending on status, changes image source to "data-animate" or "data-still"
+  function Animate() {
+  	 var state = $(this).attr("data-state");
+      if (state === "still") {
+        $(this).attr("src", $(this).attr("data-animate"));
+        $(this).attr("data-state", "animate");
+      } else {
+        $(this).attr("src", $(this).attr("data-still"));
+        $(this).attr("data-state", "still");
+  }
+}
+
+});
