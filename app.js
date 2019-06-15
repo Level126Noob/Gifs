@@ -33,7 +33,7 @@ function displayAnimalInfo() {
                 $('#gif-view').append(GIF);
                 count++;
             } if (count === 1) {
-                $('#gif-view').empty
+                $('#gif-view').empty();
             }
             console.log(animalResponse[i].slug);
             console.log(animalResponse[i]);
