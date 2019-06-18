@@ -11,7 +11,7 @@ var animals = ['dog', 'cat', 'rabbit', 'hamster', 'skunk', 'goldfish',
 //through the for if statements.
 function displayAnimalInfo() {
     var animal = $(this).attr('data-name');
-    var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=FyOiNZxGZwCSwKje0YUf34Lxw8P8OmCn&q=' + animal + '&limit=10&offset=0&rating=G&lang=en'
+    var queryURL = 'https://api.giphy.com/v1/gifs/search?api_key=FyOiNZxGZwCSwKje0YUf34Lxw8P8OmCn&q=' + animal + '&limit=11&offset=0&rating=G&lang=en'
     var animalResponse = [];
     var count = 0;
 
@@ -29,7 +29,7 @@ function displayAnimalInfo() {
                 var GifImage = animalResponse[i].images.fixed_height_small_still.url
                 //assinging all attributes using above variable for data-still, data-state, and data-animate. Attaching them to the img.
                 var GifHolder = $('<img>').attr('src', GifImage).attr('data-animate', animalResponse[i].images.fixed_height_small.url).attr('data-state', 'still').attr('data-still', GifImage);
-                //Assinging the GIF variable an ID for CSS styling purposes
+                //Assigning the GIF variable an ID for CSS styling purposes
                 var GIF = $('<div id ="GIF">')
                 var p = $("<p>").text("Rating: " + animalResponse[i].rating);
                 $(GIF).append(p);
